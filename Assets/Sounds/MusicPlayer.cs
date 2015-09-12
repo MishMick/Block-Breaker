@@ -4,15 +4,23 @@ using System.Collections;
 public class MusicPlayer : MonoBehaviour {
     static MusicPlayer instance = null;
 	// Use this for initialization
-	void Start () {
-	if(instance!=null)
+	void Awake()
 	{
-	 Destroy (gameObject);
-	 print ("Deplicate music player self destruction");
+	 Debug.Log("Music player awake:"+GetInstanceID());
+		if(instance!=null)
+		{
+			Destroy (gameObject);
+			print ("Deplicate music player self destruction");
+		}
+		else{
+			GameObject.DontDestroyOnLoad(gameObject);
+		}
 	}
-	else{
-	GameObject.DontDestroyOnLoad(gameObject);
-	}
+	void Start () 
+	{
+	 Debug.Log("Music player start:"+GetInstanceID());
+		
+	
 	}
 	// Update is called once per frame
 	void Update () {
