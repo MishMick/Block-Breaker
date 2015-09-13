@@ -1,19 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ball : MonoBehaviour {
-    public Paddle paddle;
+public class Ball : MonoBehaviour 
+{
+    private Paddle paddle;
     private Vector3 paddleToBallVector;
-	// Use this for initialization
+    private bool hasStarted=false;
+    
 	void Start () 
 	{
+	paddle = GameObject.FindObjectOfType<Paddle>();
 	paddleToBallVector = this.transform.position - paddle.transform.position;
-	print (paddleToBallVector);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	 this.transform.position = paddle.transform.position + paddleToBallVector;
+	 if(!hasStarted)
+	 {
+	 //lock the ball relative to the paddle
+	 this.transform.position = paddle.transform.position + paddleToBallVector;	
+	 //wait for mouse click	
+	 if(Input.GetMouseButtonDown(0))
+	  {
+	  print ("Mouse Clicked!");
+	  hasStarted = true;
+	  GetComponent<Rigidbody2D>().velocity = new Vector2(2f,10f);
+	  }
+	 }
 	}
 }
