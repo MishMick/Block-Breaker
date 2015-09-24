@@ -29,6 +29,13 @@ public class Paddle : MonoBehaviour
 		Vector3 ballPos = ball.transform.position;
 		paddlePos.x = Mathf.Clamp(ballPos.x,0.5f,15.5f);
 		this.transform.position = paddlePos;
+		
+		if(Input.GetTouch(0).phase == TouchPhase.Moved)
+		{
+		 Vector2 TouchDeltaPosition = Input.GetTouch(0).deltaPosition;
+		 Vector3 paddlePosition = new Vector3(TouchDeltaPosition.x,this.transform.position.y,0f);
+		 this.transform.position = paddlePosition;
+		}
 	}
 	
 	void Autoplay()
