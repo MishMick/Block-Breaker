@@ -20,7 +20,7 @@ public class Paddle : MonoBehaviour
 	if(autoplay)
 	  Autoplay();
 	  else
-	  MoveWithMouse();
+	  MoveWithAccelerometer();
 	}
 	
 	void MoveWithMouse()
@@ -36,6 +36,14 @@ public class Paddle : MonoBehaviour
 		 Vector3 paddlePosition = new Vector3(TouchDeltaPosition.x,this.transform.position.y,0f);
 		 this.transform.position = paddlePosition;
 		}
+	}
+	void MoveWithAccelerometer()
+	{
+	this.transform.Translate(Input.acceleration.x,0,0);
+		/*Vector3 paddlePos = new Vector3(Input.acceleration.x,this.transform.position.y,0f);
+		Vector3 ballPos = ball.transform.position;
+		paddlePos.x = Mathf.Clamp(ballPos.x,0.5f,15.5f);
+		this.transform.position = paddlePos;*/
 	}
 	
 	void Autoplay()
